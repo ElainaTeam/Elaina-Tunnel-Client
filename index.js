@@ -18,8 +18,8 @@ if (argv._[0] == 'config') {
     }
 } else if (argv._[0] == 'forward') {
     const local = argv._[1]
-    const host = local.split(':')[0] || '127.0.0.1'
-    const port = local.split(':')[1] || 80
+    const host = local.length > 0 ? local?.split(':')?.[0] : '127.0.0.1'
+    const port = local.length > 0 ? local?.split(':')?.[1] : 80
     const forwardPort = argv._[2]
     if (!port) return console.log(colors.red(`[ERR]: Not enough args`));
     const socket = socketio(`ws://${server}:8888`, {
