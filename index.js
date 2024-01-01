@@ -9,7 +9,7 @@ const colors = require('colors');
 const transactions = {};
 if (argv._[0] == 'config') {
     if (argv._[1] == 'token') {
-        if (!argv._[2]) return console.log(`[ERR]: Not enough args`);
+        if (!argv._[2]) return console.log(colors.red(`[ERR]: Not enough args`));
         db.set('token', argv._[2]);
         console.log(colors.green(`[OK]: Set your token`));
         return process.exit();
