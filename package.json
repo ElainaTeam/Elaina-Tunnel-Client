@@ -1,0 +1,14 @@
+{
+  "name": "Elaina Tunnel Client",
+  "bin": "./index.js",
+  "scripts": {
+    "start": "node ."
+  },
+  "dependencies": {
+    "colors": "^1.4.0",
+    "minimist": "^1.2.8",
+    "net": "^1.0.2",
+    "simple-json-db": "^2.0.0",
+    "socket.io-client": "^4.7.2"
+  }
+}
