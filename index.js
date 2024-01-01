@@ -17,7 +17,9 @@ if (argv._[0] == 'config') {
         console.log(colors.red(`[ERR]: Unknown choice`));
     }
 } else if (argv._[0] == 'forward') {
-    const port = argv._[1]
+    const local = argv._[1]
+    const host = local.split(':')[0] || '127.0.0.1'
+    const port = local.split(':')[1] || 80
     const forwardPort = argv._[2]
     if (!port) return console.log(colors.red(`[ERR]: Not enough args`));
     const socket = socketio(`ws://${server}:8888`, {
@@ -35,13 +37,13 @@ if (argv._[0] == 'config') {
         if (data.exit) return process.exit()
     });
     socket.on('tunnelReady', (data) => {
-        console.log(colors.green(`[OK]: Forwarding localhost:${port} -> ${server}:${data.port}`));
+        console.log(colors.green(`[OK]: Forwarding ${host}:${port} -> ${server}:${data.port}`));
     });
 
     socket.on('event', ({ data, transId }) => {
         if (!transactions[transId]) {
             const client = new net.Socket();
-            client.connect(port, '127.0.0.1', function () {
+            client.connect(port, host, function () {
                 client.write(data);
             });
             client.on('data', function (clientData) {
