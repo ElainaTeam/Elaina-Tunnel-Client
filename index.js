@@ -48,7 +48,10 @@ if (argv._[0] == 'config') {
             });
             client.on('data', function (clientData) {
                 client.setKeepAlive(true, 1000)
-                socket.emit(`event-${transId}`, clientData);
+                socket.emit(`event-${transId}`, {
+                    token: db.get('token'),
+                    buffer: clientData,
+                });
             });
 
             client.on('error', (e) => {

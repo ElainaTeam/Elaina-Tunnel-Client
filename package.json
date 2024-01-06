@@ -1,6 +1,9 @@
 {
-  "name": "Elaina Tunnel Client",
-  "bin": "./index.js",
+  "name": "elainatunnel-cli",
+  "main": "./index.js",
+  "bin": {
+    "elntunnel": "./index.js"
+  },
   "scripts": {
     "start": "node ."
   },
