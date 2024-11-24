@@ -43,11 +43,11 @@ if (argv._[0] == 'config') {
     socket.on('event', ({ data, transId }) => {
         if (!transactions[transId]) {
             const client = new net.Socket();
+            client.setKeepAlive(true, 1000) // Set keepAlive once
             client.connect(port, host, function () {
                 client.write(data);
             });
             client.on('data', function (clientData) {
-                client.setKeepAlive(true, 1000)
                 socket.emit(`event-${transId}`, {
                     token: db.get('token'),
                     buffer: clientData,
